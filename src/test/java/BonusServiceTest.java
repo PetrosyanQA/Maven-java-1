@@ -1,9 +1,8 @@
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BonusServiceTest {
-
     @org.junit.jupiter.api.Test
-    void shouldCalculateForUnRegisteredAndUnderLimit() {
+    void shouldCalculateForRegisteredAndUnderLimit() {
         BonusService service = new BonusService();
 
         // подготавливаем данные:
@@ -19,7 +18,38 @@ public class BonusServiceTest {
     }
 
     @org.junit.jupiter.api.Test
-    void shouldCalculateForUnRegisteredAndOverLimit() {
+    void testRegisteredAndOverLimit() {
+        BonusService service = new BonusService();
+
+        // подготавливаем данные:
+        long amount = 1_000_000;
+        boolean registered = true;
+        long expected = 500;
+
+        // вызываем целевой метод:
+        long actual = service.calculate(amount, registered);
+
+        // производим проверку (сравниваем ожидаемый и фактический):
+        assertEquals(expected, actual);
+    }
+
+    void testURegisteredAndOverLimit() {
+        BonusService service = new BonusService();
+
+        // подготавливаем данные:
+        long amount = 1_000_000;
+        boolean registered = false;
+        long expected = 1;
+
+        // вызываем целевой метод:
+        long actual = service.calculate(amount, registered);
+
+        // производим проверку (сравниваем ожидаемый и фактический):
+        assertEquals(expected, actual);
+    }
+
+    @org.junit.jupiter.api.Test
+    void testUnRegisteredLimit() {
         BonusService service = new BonusService();
 
         // подготавливаем данные:

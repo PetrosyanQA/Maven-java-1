@@ -1,3 +1,5 @@
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BonusServiceTest {
@@ -33,13 +35,14 @@ public class BonusServiceTest {
         assertEquals(expected, actual);
     }
 
+    @Test
     void testURegisteredAndOverLimit() {
         BonusService service = new BonusService();
 
         // подготавливаем данные:
-        long amount = 1_000_000;
+        long amount = 1000;
         boolean registered = false;
-        long expected = 1;
+        long expected = 10;
 
         // вызываем целевой метод:
         long actual = service.calculate(amount, registered);
